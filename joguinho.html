@@ -43,14 +43,19 @@
 			//setando tipo de canvas
 			canvasContext = canvas.getContext('2d');
 			
-			//desenhando tela pela funcao desenhaNaTela (1000 = 1seg)
-			setInterval(desenhaNaTela, 1000/framesPorSegundo);
+			//desenhando tela e movendo pela funcao DesenhaEMove (1000 = 1seg)
+			setInterval(DesenhaEMove, 1000/framesPorSegundo);
 			
+		}
+		
+		function DesenhaEMove()
+		{
+			desenhaNaTela();
+			movimentaObjetos();
 		}
 		
 		function desenhaNaTela()
 		{			
-			movimentaObjetos();
 			
 			//desenhando fundo preto e definindo posicao
 			canvasContext.fillStyle = 'black';
@@ -74,7 +79,6 @@
 		
 		function movimentaObjetos()
 		{
-			
 			//teste bola movimento em x e y
 			bolaX = bolaX + 1;
 			bolaY = bolaY - 1;
