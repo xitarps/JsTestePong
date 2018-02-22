@@ -13,12 +13,14 @@
 		<canvas id="gameCanvas" width="800" height="600"></canvas>
 		
 		<script>
-		//declarando variaveis de ----------------------------------------------------------------------------------------------------------------
+		//declarando variaveis ------------------------------------------------------------------------------------------------------------------
 		var canvas;
 		var canvasContext;
 		var NumeroRandomico = 1;
 		var VelocidadeRandomicoIA = 1.5;
 		var velocidadeIA = 1.5;
+		var p1Score =0;
+		var p2Score =0;
 		
 		//declarando variaveis para a bola
 		var bolaTamanhoX=10;
@@ -149,6 +151,10 @@
 			//		criaImagemTemplate(bolaX,bolaY,bolaTamanhoX,bolaTamanhoY,'white');
 			//redonda:
 					criaCirculoTemplate(bolaX,bolaY,10, 100, true, 'white')
+					
+			//desenhando score
+			canvasContext.fillText('Player1 Score:   '+p1Score, 160, 100);
+			canvasContext.fillText('IA Score:   '+p2Score, canvas.width-220, 100);
 			
 		}
 		
@@ -159,7 +165,15 @@
 			//checando posicao da bola para entao alterar sua direcao em relacao ao campo
 			if(bolaX > canvas.width-bolaTamanhoX || bolaX< 10)
 			{
-				//bolaVelocidadeX = bolaVelocidadeX*-1;
+				//pontuando
+				if(bolaX >400)
+				{
+					p1Score +=1;
+				}
+				if(bolaX <400)
+				{
+					p2Score +=1;
+				}
 				//"reinicia partida"
 				resetarBola();
 				
