@@ -10,10 +10,7 @@
 	
 	<body>
 		
-	
 		<canvas id="gameCanvas" width="800" height="600"></canvas>
-		
-		
 		
 		<script>
 		//declarando variaveis de canvas
@@ -53,10 +50,7 @@
 		
 		function desenhaNaTela()
 		{			
-		
-			//teste bola movimento em x e y
-			bolaX = bolaX + 1;
-			bolaY = bolaY - 1;
+			movimentaObjetos();
 			
 			//desenhando fundo preto e definindo posicao
 			canvasContext.fillStyle = 'black';
@@ -76,6 +70,14 @@
 			canvasContext.fillStyle = 'white';
 			//posicionando e setando tamanho
 			canvasContext.fillRect(bolaX,bolaY,10,10);
+		}
+		
+		function movimentaObjetos()
+		{
+			
+			//teste bola movimento em x e y
+			bolaX = bolaX + 1;
+			bolaY = bolaY - 1;
 		}
 		</script>
 		
