@@ -25,9 +25,11 @@
 		var bolaVelocidadeX = 1;
 		var bolaVelocidadeY = -1;
 		
-		//declarando variaveis para divisoria do campo e "raquetes"
+		//declarando variaveis para divisoria do campo
  		var divX = 4;
 		var divY = 0;
+		
+		//declarando variaveis para "raquetes"
 		var raqX = 10;
 		var raqY = 100;
 		
@@ -110,12 +112,27 @@
 		}
 		
 		//funcao que funciona como template para criar circulos e assim melhorar a legibilidade do codigo
-		function criaCirculoTemplate(posicaoX,posicaoY,tamanho, raio, bool, cor)
+		function criaCirculoTemplate(posicaoX,posicaoY,raio, porcentagem, bool, cor)
 		{
 			canvasContext.fillStyle = cor;
 			canvasContext.beginPath();
-			canvasContext.arc(posicaoX,posicaoY,tamanho,raio,Math.PI*2, bool,cor);
+			canvasContext.arc(posicaoX,posicaoY,raio,porcentagem,Math.PI*2, bool,cor);
 			canvasContext.fill();
+		}
+		
+		
+		//retorna posicao do mouse
+		function posicaoDoMouse(evt)
+		{
+			var rect = canvas.getBoundingClientRect();
+			var root = document.documentElement;
+			var mouseX = evt.clientX - rect.left -  root.scrollLeft;
+			var mouseY = evt.clientY - rect.top -  root.scrollTop;
+			return
+			{
+				x:mouseX,
+				y:mouseY
+			};
 		}
 		</script>
 		
