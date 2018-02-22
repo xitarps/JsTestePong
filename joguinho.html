@@ -256,12 +256,12 @@
 		
 		function p2Acompanha()
 		{
-			if(raqPositionP2Y+107<bolaY)
+			if(raqPositionP2Y+107-20<bolaY)
 			{
 				//raqVelocidadeP2Y = 1.9;
 				raqVelocidadeP2Y = VelocidadeRandomicoIA;
 			}
-			if(raqPositionP2Y>bolaY)
+			if(raqPositionP2Y>bolaY+20)
 			{
 				//raqVelocidadeP2Y = -1.9;
 				raqVelocidadeP2Y = VelocidadeRandomicoIA*-1;
@@ -274,7 +274,7 @@
 		
 		function iaRandomicoVelocidade()
 		{	
-				velocidadeIA = (Math.floor(Math.random() * 30) +20);
+				velocidadeIA = (Math.floor(Math.random() * 28) +18);
 				velocidadeIA = (velocidadeIA)/10;
 				VelocidadeRandomicoIA = velocidadeIA;
 		}
