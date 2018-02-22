@@ -63,29 +63,22 @@
 		{			
 			
 			//desenhando fundo preto e definindo posicao
-			canvasContext.fillStyle = 'black';
-			canvasContext.fillRect(0,0,canvas.width,canvas.height);
+			criaImagemTemplate(0,0,canvas.width,canvas.height,'black');
 	
-			//desenhando linha divvisoria do campo dos jogadores cor verde
-			canvasContext.fillStyle = '#00cc00';
-			//posicionando e setando tamanho
-			canvasContext.fillRect((canvas.width/2)-(divX/2),0,divX,divY);
+			//desenhando linha divvisoria do campo dos jogadores. cor verde
+			criaImagemTemplate((canvas.width/2)-(divX/2),0,divX,divY,'#00cc00');
 			
 			//desenhando p1 "raquete" cor verde
-			canvasContext.fillStyle = '#00cc00';
-			//posicionando e setando tamanho
-			canvasContext.fillRect(10,(canvas.height/2)-(raqY/2),raqX,raqY);
+			criaImagemTemplate(10,(canvas.height/2)-(raqY/2),raqX,raqY,'#00cc00');
 			
 			//desenhando a "bola"
-			canvasContext.fillStyle = 'white';
-			//posicionando e setando tamanho
-			canvasContext.fillRect(bolaX,bolaY,bolaTamanhoX,bolaTamanhoY);
+			criaImagemTemplate(bolaX,bolaY,bolaTamanhoX,bolaTamanhoY,'white');
 		}
 		
 		function movimentaObjetos()
 		{
 		
-			
+			//checando posicao da bola para entao alterar sua direcao
 			if(bolaX > canvas.width-bolaTamanhoX || bolaX< 0)
 			{
 				bolaVelocidadeX = bolaVelocidadeX*-1;
@@ -99,6 +92,12 @@
 			//teste bola movimento em x e y
 			bolaX = bolaX + bolaVelocidadeX;
 			bolaY = bolaY + bolaVelocidadeY;
+		}
+		
+		function criaImagemTemplate(esquerdaX,topoY, largura, altura, cor)
+		{
+			canvasContext.fillStyle = cor;
+			canvasContext.fillRect(esquerdaX,topoY,largura,altura);
 		}
 		</script>
 		
