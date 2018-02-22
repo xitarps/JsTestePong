@@ -34,8 +34,12 @@
 			canvasContext.fillRect(0,0,canvas.width,canvas.height);
 			
 			//desenhando linha divvisoria do campo dos jogadores
+			canvasContext.fillStyle = 'green';
+			canvasContext.fillRect(400,0,1,canvas.height);
+			
+			//desenhando a "bola"
 			canvasContext.fillStyle = 'white';
-			canvasContext.fillRect(400,0,5,canvas.height);
+			canvasContext.fillRect(395,295,10,10);
 		}
 		</script>
 		
