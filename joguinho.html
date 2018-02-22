@@ -19,8 +19,8 @@
 		var canvasContext;
 		
 		//declarando variaveis para a bola
-		var bolaX;
-		var bolaY;
+		var bolaX = 395;
+		var bolaY = 295;
 		
 		window.onload = function()
 		{
@@ -33,13 +33,16 @@
 			//setando tipo de canvas
 			canvasContext = canvas.getContext('2d');
 			
-			//desenhando tela pela funcao desenhaNaTela
-			desenhaNaTela()
+			//desenhando tela pela funcao desenhaNaTela com intervalo de 10
+			setInterval(desenhaNaTela, 10);
 			
 		}
 		
-		funtion desenhaNaTela()
-		{
+		function desenhaNaTela()
+		{			
+		
+			//teste bola movimento em x
+			bolaX = bolaX + 1;
 			
 			//desenhando fundo preto
 			canvasContext.fillStyle = 'black';
@@ -51,7 +54,7 @@
 			
 			//desenhando a "bola"
 			canvasContext.fillStyle = 'white';
-			canvasContext.fillRect(395,295,10,10);
+			canvasContext.fillRect(bolaX,bolaY,10,10);
 		}
 		</script>
 		
