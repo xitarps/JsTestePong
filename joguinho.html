@@ -13,11 +13,12 @@
 		<canvas id="gameCanvas" width="800" height="600"></canvas>
 		
 		<script>
-		//declarando variaveis de canvas--------------------------------------------------------------------------------------------------------
+		//declarando variaveis de ----------------------------------------------------------------------------------------------------------------
 		var canvas;
 		var canvasContext;
 		var NumeroRandomico = 1;
-		console.log("numero randomico = "+NumeroRandomico);
+		var VelocidadeRandomicoIA = 1.5;
+		var velocidadeIA = 1.5;
 		
 		//declarando variaveis para a bola
 		var bolaTamanhoX=10;
@@ -31,13 +32,22 @@
  		var divX = 4;
 		var divY = 0;
 		
-		//declarando variaveis para "raquetes"
+		//declarando variaveis para "raquete p1"
 		var raqX = 10;
 		var raqY = 100;
 		var raqPositionX=0;
 		var raqPositionY=0;
 		var raqPositionMaxY=0;
 		var raqPositionMinY=0;
+		
+		//declarando variaveis para "raquete p2"
+		var raqP2X = 10;
+		var raqP2Y = 100;
+		var raqPositionP2X=0;
+		var raqPositionP2Y=0;
+		var raqPositionMaxP2Y=0;
+		var raqPositionMinP2Y=0;
+		var raqVelocidadeP2Y = 0;
 		
 		
 		//declarando variavel para controle de FPS e segundos
@@ -68,16 +78,30 @@
 			
 			//setando canvas pelo id e variaveis de outro escopo
 			canvas = document.getElementById('gameCanvas');
+			
+			//setando divisoria
 			divY = canvas.height;
+			
+			//setando posicao de p1
 			raqPositionX = 0;
-			raqPositiony = (canvas.height/2)-(raqY/2);
+			raqPositionY = (canvas.height/2)-(raqY/2);
+			
+			//setando posicao de p2
+			raqPositionP2X = 790;
+			raqPositionP2Y = (canvas.height/2)-(raqY/2);
 			
 			//setando tipo de canvas
 			canvasContext = canvas.getContext('2d');
 			
 			//desenhando tela e movendo pela funcao DesenhaEMove (1000 = 1seg)
 			setInterval(DesenhaEMove, 1000/framesPorSegundo);
+			//definindo aceleracao da bola
 			setInterval(Acelera, segs*1000);
+			//ligando p2 para acompanhar bola
+			setInterval(p2Acompanha, 1);
+			//alterando velocidade de ia randomicamente
+			setInterval(iaRandomicoVelocidade, 1000);
+			
 			
 			//captura e atualiza posicao da raquete no eixo y
 			canvas.addEventListener('mousemove',
@@ -117,6 +141,9 @@
 			//desenhando p1 "raquete" cor verde esquerda
 			criaImagemTemplate(raqPositionX,raqPositionY,raqX,raqY,'#00cc00');
 			
+			//desenhando p2 "raquete" cor verde direita
+			criaImagemTemplate(raqPositionP2X,raqPositionP2Y,raqP2X,raqP2Y,'#00cc00');
+			
 			//desenhando a "bola"
 			//quadrada: 
 			//		criaImagemTemplate(bolaX,bolaY,bolaTamanhoX,bolaTamanhoY,'white');
@@ -129,7 +156,7 @@
 		function movimentaObjetos()
 		{
 		
-			//checando posicao da bola para entao alterar sua direcao
+			//checando posicao da bola para entao alterar sua direcao em relacao ao campo
 			if(bolaX > canvas.width-bolaTamanhoX || bolaX< 10)
 			{
 				//bolaVelocidadeX = bolaVelocidadeX*-1;
@@ -142,14 +169,25 @@
 				bolaVelocidadeY = bolaVelocidadeY*-1;
 			}
 			
-			//ajustando area de bounce da raquete
+			//ajustando area de bounce da raquete p1
 			raqPositionMaxY = raqPositionY;
 			raqPositionMinY = raqPositionY + 107;
 			
-			//rebate da raquete
+			//rebate da raquete p1
 			if(bolaX-5 <10 && bolaY > raqPositionMaxY && bolaY < raqPositionMinY)
 			{
-				bolaVelocidadeY = bolaVelocidadeY*-1;
+				//bolaVelocidadeY = bolaVelocidadeY*-1;
+				bolaVelocidadeX = bolaVelocidadeX*-1;
+			}
+			
+			//ajustando area de bounce da raquete
+			raqPositionMaxP2Y = raqPositionP2Y;
+			raqPositionMinP2Y = raqPositionP2Y + 107;
+			
+			//rebate da raquete p2
+			if(bolaX >780 && bolaY > raqPositionMaxP2Y && bolaY < raqPositionMinP2Y)
+			{
+				//bolaVelocidadeY = bolaVelocidadeY*-1;
 				bolaVelocidadeX = bolaVelocidadeX*-1;
 			}
 			
@@ -174,6 +212,7 @@
 			canvasContext.fill();
 		}
 		
+		//reseta bola e lanca randomicamente---------------------------------------------------------------------------------------------------------
 		function resetarBola()
 		{
 			//variavel (1 ou 2) randomica para decidir se sera positivo ou negativo/para cima ou para baixo
@@ -212,6 +251,34 @@
 			NumeroRandomico = 1;
 			console.log("numero randomico = "+NumeroRandomico);
 		}
+		
+		//funcao player 2 ---------------------------------------------------------------------------------------------------------------------------
+		
+		function p2Acompanha()
+		{
+			if(raqPositionP2Y+107<bolaY)
+			{
+				//raqVelocidadeP2Y = 1.9;
+				raqVelocidadeP2Y = VelocidadeRandomicoIA;
+			}
+			if(raqPositionP2Y>bolaY)
+			{
+				//raqVelocidadeP2Y = -1.9;
+				raqVelocidadeP2Y = VelocidadeRandomicoIA*-1;
+			}
+			
+			raqPositionP2Y= raqPositionP2Y + raqVelocidadeP2Y;
+		}
+		
+		//funcao numerorandomico----------------------------------------------------------------------------------------------------------------------
+		
+		function iaRandomicoVelocidade()
+		{	
+				velocidadeIA = (Math.floor(Math.random() * 30) +20);
+				velocidadeIA = (velocidadeIA)/10;
+				VelocidadeRandomicoIA = velocidadeIA;
+		}
+		
 		</script>
 		
 	</body>
