@@ -6,7 +6,7 @@
 			Joguinho...
 		</title>
 		
-	<head>
+	</head>
 	
 	<body>
 		
@@ -32,9 +32,29 @@
 		//declarando variaveis para "raquetes"
 		var raqX = 10;
 		var raqY = 100;
+		var raqPositionX=0;
+		var raqPositionY=0;
 		
 		//declarando variavel para controle de FPS
 		var framesPorSegundo =120;
+		
+		
+		
+		//retorna posicao do mouse independente da tela
+		function posicaoDoMouse(evt)
+		{
+			
+			var retanguloBase = canvas.getBoundingClientRect();
+			var pagina = document.documentElement;
+			var mouseX = evt.clientX - retanguloBase.left -  pagina.scrollLeft;
+			var mouseY = evt.clientY - retanguloBase.top -  pagina.scrollTop;
+			return{
+			x:mouseX,
+			y:mouseY
+			};
+			
+			
+		}
 		
 		//dispara apos carregar todo conteudo da pagina
 		window.onload = function()
@@ -45,13 +65,21 @@
 			//setando canvas pelo id e variaveis de outro escopo
 			canvas = document.getElementById('gameCanvas');
 			divY = canvas.height;
-			//raqY = canvas.height;
+			raqPositionX = 10;
+			raqPositiony = (canvas.height/2)-(raqY/2);
 			
 			//setando tipo de canvas
 			canvasContext = canvas.getContext('2d');
 			
 			//desenhando tela e movendo pela funcao DesenhaEMove (1000 = 1seg)
 			setInterval(DesenhaEMove, 1000/framesPorSegundo);
+			
+			//captura e atualiza posicao da raquete no eixo y
+			canvas.addEventListener('mousemove',
+			function(evt){
+				var mousePos = posicaoDoMouse(evt); 
+				raqPositionY = mousePos.y;;
+			});
 			
 		}
 		
@@ -74,7 +102,7 @@
 			criaImagemTemplate((canvas.width/2)-(divX/2),0,divX,divY,'#00cc00');
 			
 			//desenhando p1 "raquete" cor verde esquerda
-			criaImagemTemplate(10,(canvas.height/2)-(raqY/2),raqX,raqY,'#00cc00');
+			criaImagemTemplate(raqPositionX,raqPositionY,raqX,raqY,'#00cc00');
 			
 			//desenhando a "bola"
 			//quadrada: 
@@ -121,19 +149,6 @@
 		}
 		
 		
-		//retorna posicao do mouse
-		function posicaoDoMouse(evt)
-		{
-			var rect = canvas.getBoundingClientRect();
-			var root = document.documentElement;
-			var mouseX = evt.clientX - rect.left -  root.scrollLeft;
-			var mouseY = evt.clientY - rect.top -  root.scrollTop;
-			return
-			{
-				x:mouseX,
-				y:mouseY
-			};
-		}
 		</script>
 		
 	</body>
