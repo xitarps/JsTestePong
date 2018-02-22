@@ -34,6 +34,7 @@
 		//declarando variavel para controle de FPS
 		var framesPorSegundo =120;
 		
+		//dispara apos carregar todo conteudo da pagina
 		window.onload = function()
 		{
 			//testando console
@@ -52,6 +53,7 @@
 			
 		}
 		
+		//uniao das funcoes de deenhar e mover
 		function DesenhaEMove()
 		{
 			desenhaNaTela();
@@ -59,6 +61,7 @@
 			
 		}
 		
+		//funcao para desenhar os objetos usando um template
 		function desenhaNaTela()
 		{			
 			
@@ -75,6 +78,7 @@
 			criaImagemTemplate(bolaX,bolaY,bolaTamanhoX,bolaTamanhoY,'white');
 		}
 		
+		//funcao que determina o movimento dos objetos
 		function movimentaObjetos()
 		{
 		
@@ -94,6 +98,7 @@
 			bolaY = bolaY + bolaVelocidadeY;
 		}
 		
+		//funcao que funciona como template para criar obetos assim melhorar a legibilidade do codigo
 		function criaImagemTemplate(esquerdaX,topoY, largura, altura, cor)
 		{
 			canvasContext.fillStyle = cor;
