@@ -13,7 +13,7 @@
 		<canvas id="gameCanvas" width="800" height="600"></canvas>
 		
 		<script>
-		//declarando variaveis de canvas
+		//declarando variaveis de canvas--------------------------------------------------------------------------------------------------------
 		var canvas;
 		var canvasContext;
 		
@@ -22,7 +22,7 @@
 		var bolaTamanhoY=10;
 		var bolaX = 395;
 		var bolaY = 295;
-		var bolaVelocidadeX = 1;
+		var bolaVelocidadeX = -1;
 		var bolaVelocidadeY = -1;
 		
 		//declarando variaveis para divisoria do campo
@@ -34,20 +34,23 @@
 		var raqY = 100;
 		var raqPositionX=0;
 		var raqPositionY=0;
+		var raqPositionMaxY=0;
+		var raqPositionMinY=0;
+		
 		
 		//declarando variavel para controle de FPS e segundos
 		var framesPorSegundo =120;
 		var segs = 2;
 		
 		
-		//retorna posicao do mouse independente da tela
+		//retorna posicao do mouse independente da tela------------------------------------------------------------------------------------------
 		function posicaoDoMouse(evt)
 		{
 			
 			var retanguloBase = canvas.getBoundingClientRect();
 			var pagina = document.documentElement;
 			var mouseX = evt.clientX - retanguloBase.left -  pagina.scrollLeft;
-			var mouseY = evt.clientY - retanguloBase.top -  pagina.scrollTop;
+			var mouseY = evt.clientY - retanguloBase.top -  pagina.scrollTop - (raqY/2);
 			return{
 			x:mouseX,
 			y:mouseY
@@ -56,7 +59,7 @@
 			
 		}
 		
-		//dispara apos carregar todo conteudo da pagina
+		//dispara apos carregar todo conteudo da pagina-------------------------------------------------------------------------------------------
 		window.onload = function()
 		{
 			//testando console
@@ -65,7 +68,7 @@
 			//setando canvas pelo id e variaveis de outro escopo
 			canvas = document.getElementById('gameCanvas');
 			divY = canvas.height;
-			raqPositionX = 10;
+			raqPositionX = 0;
 			raqPositiony = (canvas.height/2)-(raqY/2);
 			
 			//setando tipo de canvas
@@ -84,7 +87,7 @@
 			
 		}
 		
-		//funcao que define o quanto acelera a bola
+		//funcao que define o quanto acelera a bola-----------------------------------------------------------------------------------------------
 		function Acelera()
 		{
 			
@@ -92,7 +95,7 @@
 			bolaVelocidadeY = bolaVelocidadeY*1.1;
 		}
 		
-		//uniao das funcoes de deenhar e mover
+		//uniao das funcoes de deenhar e mover-----------------------------------------------------------------------------------------------------
 		function DesenhaEMove()
 		{
 			desenhaNaTela();
@@ -100,7 +103,7 @@
 			
 		}
 		
-		//funcao para desenhar os objetos usando um template
+		//funcao para desenhar os objetos usando um template---------------------------------------------------------------------------------------
 		function desenhaNaTela()
 		{			
 			
@@ -121,34 +124,49 @@
 			
 		}
 		
-		//funcao que determina o movimento dos objetos
+		//funcao que determina o movimento dos objetos--------------------------------------------------------------------------------------------
 		function movimentaObjetos()
 		{
 		
 			//checando posicao da bola para entao alterar sua direcao
 			if(bolaX > canvas.width-bolaTamanhoX || bolaX< 10)
 			{
-				bolaVelocidadeX = bolaVelocidadeX*-1;
+				//bolaVelocidadeX = bolaVelocidadeX*-1;
+				//"reinicia partida"
+				bolaX = 395;
+				bolaY = 295;
+				bolaVelocidadeX = -1;
+				bolaVelocidadeY = -1;
 			}
 			if(bolaY > canvas.height-bolaTamanhoY || bolaY< 10)
 			{
 				bolaVelocidadeY = bolaVelocidadeY*-1;
 			}
 			
+			//ajustando area de bounce da raquete
+			raqPositionMaxY = raqPositionY - 105;
+			raqPositionMinY = raqPositionY + 105;
 			
-			//teste bola movimento em x e y
+			//rebate da raquete
+			if(bolaX-10 <10 && bolaY > raqPositionMaxY && bolaY < raqPositionMinY)
+			{
+				bolaVelocidadeY = bolaVelocidadeY*-1;
+				bolaVelocidadeX = bolaVelocidadeX*-1;
+			}
+			
+			//set bola movimento em x e y
 			bolaX = bolaX + bolaVelocidadeX;
 			bolaY = bolaY + bolaVelocidadeY;
 		}
 		
-		//funcao que funciona como template para criar obetos e assim melhorar a legibilidade do codigo
+		//funcao que funciona como template para criar obetos e assim melhorar a legibilidade do codigo----------------------------------------------
 		function criaImagemTemplate(esquerdaX,topoY, largura, altura, cor)
 		{
 			canvasContext.fillStyle = cor;
 			canvasContext.fillRect(esquerdaX,topoY,largura,altura);
 		}
 		
-		//funcao que funciona como template para criar circulos e assim melhorar a legibilidade do codigo
+		//funcao que funciona como template para criar circulos e assim melhorar a legibilidade do codigo--------------------------------------------
 		function criaCirculoTemplate(posicaoX,posicaoY,raio, porcentagem, bool, cor)
 		{
 			canvasContext.fillStyle = cor;
