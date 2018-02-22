@@ -20,6 +20,8 @@
 		//declarando variaveis para a bola
 		var bolaX = 395;
 		var bolaY = 295;
+		var bolaVelocidadeX = 1;
+		var bolaVelocidadeY = -1;
 		
 		//declarando variaveis para divisoria do campo e "raquetes"
  		var divX = 4;
@@ -52,6 +54,7 @@
 		{
 			desenhaNaTela();
 			movimentaObjetos();
+			
 		}
 		
 		function desenhaNaTela()
@@ -79,9 +82,21 @@
 		
 		function movimentaObjetos()
 		{
+		
+			
+			if(bolaX > 790 || bolaX< 0)
+			{
+				bolaVelocidadeX = bolaVelocidadeX*-1;
+			}
+			if(bolaY > 590 || bolaY< 0)
+			{
+				bolaVelocidadeY = bolaVelocidadeY*-1;
+			}
+			
+			
 			//teste bola movimento em x e y
-			bolaX = bolaX + 1;
-			bolaY = bolaY - 1;
+			bolaX = bolaX + bolaVelocidadeX;
+			bolaY = bolaY + bolaVelocidadeY;
 		}
 		</script>
 		
