@@ -75,7 +75,14 @@
 			criaImagemTemplate(10,(canvas.height/2)-(raqY/2),raqX,raqY,'#00cc00');
 			
 			//desenhando a "bola"
-			criaImagemTemplate(bolaX,bolaY,bolaTamanhoX,bolaTamanhoY,'white');
+			//quadrada: 
+			//		criaImagemTemplate(bolaX,bolaY,bolaTamanhoX,bolaTamanhoY,'white');
+			//redonda:
+			canvasContext.fillStyle = 'white';
+			canvasContext.beginPath();
+			canvasContext.arc(bolaX,bolaY,10,0,Math.PI*2, true);
+			canvasContext.fill();
+			
 		}
 		
 		//funcao que determina o movimento dos objetos
