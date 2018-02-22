@@ -29,11 +29,13 @@
 			//setando tipo de canvas
 			canvasContext = canvas.getContext('2d');
 			
-			//setando canvas para cor black
+			//desenhando fundo preto
 			canvasContext.fillStyle = 'black';
-			
-			//definindo propriedades do canvas
 			canvasContext.fillRect(0,0,canvas.width,canvas.height);
+			
+			//desenhando linha divvisoria do campo dos jogadores
+			canvasContext.fillStyle = 'white';
+			canvasContext.fillRect(400,0,5,canvas.height);
 		}
 		</script>
 		
