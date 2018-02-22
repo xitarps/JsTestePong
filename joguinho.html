@@ -35,9 +35,9 @@
 		var raqPositionX=0;
 		var raqPositionY=0;
 		
-		//declarando variavel para controle de FPS
+		//declarando variavel para controle de FPS e segundos
 		var framesPorSegundo =120;
-		
+		var segs = 2;
 		
 		
 		//retorna posicao do mouse independente da tela
@@ -73,6 +73,7 @@
 			
 			//desenhando tela e movendo pela funcao DesenhaEMove (1000 = 1seg)
 			setInterval(DesenhaEMove, 1000/framesPorSegundo);
+			setInterval(Acelera, segs*1000);
 			
 			//captura e atualiza posicao da raquete no eixo y
 			canvas.addEventListener('mousemove',
@@ -81,6 +82,14 @@
 				raqPositionY = mousePos.y;;
 			});
 			
+		}
+		
+		//funcao que define o quanto acelera a bola
+		function Acelera()
+		{
+			
+			bolaVelocidadeX = bolaVelocidadeX*1.1;
+			bolaVelocidadeY = bolaVelocidadeY*1.1;
 		}
 		
 		//uniao das funcoes de deenhar e mover
