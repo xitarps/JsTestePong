@@ -16,6 +16,8 @@
 		//declarando variaveis de canvas--------------------------------------------------------------------------------------------------------
 		var canvas;
 		var canvasContext;
+		var NumeroRandomico = 1;
+		console.log("numero randomico = "+NumeroRandomico);
 		
 		//declarando variaveis para a bola
 		var bolaTamanhoX=10;
@@ -174,10 +176,41 @@
 		
 		function resetarBola()
 		{
+			//variavel (1 ou 2) randomica para decidir se sera positivo ou negativo/para cima ou para baixo
+			var decisaoPositivoOuNegativo =(Math.floor(Math.random() * 2) +1);
+			//console.log("decisaoPositivoOuNegativo = "+decisaoPositivoOuNegativo);
+			
+			
+			//numeros randomicos de 1.9 ate 1.0
+			if(decisaoPositivoOuNegativo == 1)
+			{
+				var multiplicador = (Math.floor(Math.random() * 9) +1);
+					//console.log("multiplicador tem q ser positivo");
+				multiplicador = (multiplicador+10)/10
+					//console.log("multiplicador = "+multiplicador);
+				NumeroRandomico = NumeroRandomico*multiplicador;
+					//console.log("numero randomico = "+NumeroRandomico);
+			}
+			//numeros randomicos de -1.9 ate -1.0
+			if(decisaoPositivoOuNegativo == 2)
+			{
+					//console.log("multiplicador tem q ser negativo");
+				var multiplicador = (Math.floor(Math.random() * 9) +1);
+					//console.log("multiplicador = "+multiplicador);
+				multiplicador = ((multiplicador+10)/10)*-1;
+					//console.log("multiplicador = "+multiplicador);
+				NumeroRandomico = NumeroRandomico*multiplicador;
+					//console.log("numero randomico = "+NumeroRandomico);
+			}
+			
+			//reposicionando a bola e enviando randomicamente em y
 			bolaX = 395;
 			bolaY = 295;
 			bolaVelocidadeX = -1;
-			bolaVelocidadeY = -1;
+			bolaVelocidadeY = NumeroRandomico;
+			
+			NumeroRandomico = 1;
+			console.log("numero randomico = "+NumeroRandomico);
 		}
 		</script>
 		
