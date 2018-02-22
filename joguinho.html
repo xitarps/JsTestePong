@@ -14,6 +14,7 @@
 		
 		<script>
 		//declarando variaveis ------------------------------------------------------------------------------------------------------------------
+		const PONTO_DA_VITORIA = 3;
 		var canvas;
 		var canvasContext;
 		var NumeroRandomico = 1;
@@ -21,6 +22,7 @@
 		var velocidadeIA = 1.5;
 		var p1Score =0;
 		var p2Score =0;
+		var telaFimBool=false;
 		
 		//declarando variaveis para a bola
 		var bolaTamanhoX=10;
@@ -125,6 +127,18 @@
 		//uniao das funcoes de deenhar e mover-----------------------------------------------------------------------------------------------------
 		function DesenhaEMove()
 		{
+		
+			if(telaFimBool)
+			{
+			criaImagemTemplate(0,0,canvas.width,canvas.height,'black');
+			
+			canvasContext.fillStyle = 'white';
+			canvasContext.fillText('Placar Final:   ', 400, 50);
+			canvasContext.fillText('Player1 Score:   '+p1Score, 160, 100);
+			canvasContext.fillText('IA Score:   '+p2Score, canvas.width-220, 100);
+			return;
+			}
+			
 			desenhaNaTela();
 			movimentaObjetos();
 			
@@ -174,6 +188,7 @@
 				{
 					p2Score +=1;
 				}
+				
 				//"reinicia partida"
 				resetarBola();
 				
@@ -229,6 +244,11 @@
 		//reseta bola e lanca randomicamente---------------------------------------------------------------------------------------------------------
 		function resetarBola()
 		{
+			if(p1Score >= PONTO_DA_VITORIA || p2Score >=PONTO_DA_VITORIA)
+				{
+					telaFimBool = true;
+				}
+		
 			//variavel (1 ou 2) randomica para decidir se sera positivo ou negativo/para cima ou para baixo
 			var decisaoPositivoOuNegativo =(Math.floor(Math.random() * 2) +1);
 			//console.log("decisaoPositivoOuNegativo = "+decisaoPositivoOuNegativo);
