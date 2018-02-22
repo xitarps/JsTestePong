@@ -24,6 +24,12 @@
 		var bolaX = 395;
 		var bolaY = 295;
 		
+		//declarando variaveis para divisoria do campo e "raquetes"
+ 		var divX = 4;
+		var divY = 0;
+		var raqX = 10;
+		var raqY = 100;
+		
 		//declarando variavel para controle de FPS
 		var framesPorSegundo =120;
 		
@@ -32,8 +38,10 @@
 			//testando console
 			console.log("Carregando jogo");
 			
-			//setando canvas pelo id 
+			//setando canvas pelo id e variaveis de outro escopo
 			canvas = document.getElementById('gameCanvas');
+			divY = canvas.height;
+			//raqY = canvas.height;
 			
 			//setando tipo de canvas
 			canvasContext = canvas.getContext('2d');
@@ -50,20 +58,23 @@
 			bolaX = bolaX + 1;
 			bolaY = bolaY - 1;
 			
-			//desenhando fundo preto
+			//desenhando fundo preto e definindo posicao
 			canvasContext.fillStyle = 'black';
 			canvasContext.fillRect(0,0,canvas.width,canvas.height);
+	
+			//desenhando linha divvisoria do campo dos jogadores cor verde
+			canvasContext.fillStyle = '#00cc00';
+			//posicionando e setando tamanho
+			canvasContext.fillRect((canvas.width/2)-(divX/2),0,divX,divY);
 			
-			//desenhando linha divvisoria do campo dos jogadores
-			canvasContext.fillStyle = 'green';
-			canvasContext.fillRect(400,0,1,canvas.height);
-			
-			//desenhando p1 "raquete"
-			canvasContext.fillStyle = 'green';
-			canvasContext.fillRect(10,250,10,100);
+			//desenhando p1 "raquete" cor verde
+			canvasContext.fillStyle = '#00cc00';
+			//posicionando e setando tamanho
+			canvasContext.fillRect(10,(canvas.height/2)-(raqY/2),raqX,raqY);
 			
 			//desenhando a "bola"
 			canvasContext.fillStyle = 'white';
+			//posicionando e setando tamanho
 			canvasContext.fillRect(bolaX,bolaY,10,10);
 		}
 		</script>
