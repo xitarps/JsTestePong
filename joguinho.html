@@ -18,6 +18,8 @@
 		var canvasContext;
 		
 		//declarando variaveis para a bola
+		var bolaTamanhoX=10;
+		var bolaTamanhoY=10;
 		var bolaX = 395;
 		var bolaY = 295;
 		var bolaVelocidadeX = 1;
@@ -77,18 +79,18 @@
 			//desenhando a "bola"
 			canvasContext.fillStyle = 'white';
 			//posicionando e setando tamanho
-			canvasContext.fillRect(bolaX,bolaY,10,10);
+			canvasContext.fillRect(bolaX,bolaY,bolaTamanhoX,bolaTamanhoY);
 		}
 		
 		function movimentaObjetos()
 		{
 		
 			
-			if(bolaX > 790 || bolaX< 0)
+			if(bolaX > canvas.width-bolaTamanhoX || bolaX< 0)
 			{
 				bolaVelocidadeX = bolaVelocidadeX*-1;
 			}
-			if(bolaY > 590 || bolaY< 0)
+			if(bolaY > canvas.height-bolaTamanhoY || bolaY< 0)
 			{
 				bolaVelocidadeY = bolaVelocidadeY*-1;
 			}
