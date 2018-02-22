@@ -78,10 +78,7 @@
 			//quadrada: 
 			//		criaImagemTemplate(bolaX,bolaY,bolaTamanhoX,bolaTamanhoY,'white');
 			//redonda:
-			canvasContext.fillStyle = 'white';
-			canvasContext.beginPath();
-			canvasContext.arc(bolaX,bolaY,10,0,Math.PI*2, true);
-			canvasContext.fill();
+					criaCirculoTemplate(bolaX,bolaY,10, 100, true, 'white')
 			
 		}
 		
@@ -90,11 +87,11 @@
 		{
 		
 			//checando posicao da bola para entao alterar sua direcao
-			if(bolaX > canvas.width-bolaTamanhoX || bolaX< 0)
+			if(bolaX > canvas.width-bolaTamanhoX || bolaX< 10)
 			{
 				bolaVelocidadeX = bolaVelocidadeX*-1;
 			}
-			if(bolaY > canvas.height-bolaTamanhoY || bolaY< 0)
+			if(bolaY > canvas.height-bolaTamanhoY || bolaY< 10)
 			{
 				bolaVelocidadeY = bolaVelocidadeY*-1;
 			}
@@ -105,11 +102,20 @@
 			bolaY = bolaY + bolaVelocidadeY;
 		}
 		
-		//funcao que funciona como template para criar obetos assim melhorar a legibilidade do codigo
+		//funcao que funciona como template para criar obetos e assim melhorar a legibilidade do codigo
 		function criaImagemTemplate(esquerdaX,topoY, largura, altura, cor)
 		{
 			canvasContext.fillStyle = cor;
 			canvasContext.fillRect(esquerdaX,topoY,largura,altura);
+		}
+		
+		//funcao que funciona como template para criar circulos e assim melhorar a legibilidade do codigo
+		function criaCirculoTemplate(posicaoX,posicaoY,tamanho, raio, bool, cor)
+		{
+			canvasContext.fillStyle = cor;
+			canvasContext.beginPath();
+			canvasContext.arc(posicaoX,posicaoY,tamanho,raio,Math.PI*2, bool,cor);
+			canvasContext.fill();
 		}
 		</script>
 		
