@@ -14,13 +14,26 @@
 		<canvas id="gameCanvas" width="800" height="600"></canvas>
 		
 		<script>
-		
+		//declarando variaveis de canvas
 		var canvas;
 		var canvasContext;
 		
 		window.onload = function()
 		{
+			//testando console
 			console.log("Ola Mundo!");
+			
+			//testando console
+			canvas = document.getElementById('gameCanvas');
+			
+			//testando console
+			canvasContext = canvas.getContext('2d');
+			
+			//testando console
+			canvasContext.fillStyle = 'black';
+			
+			//testando console
+			canvasContext.fillRect(0,0,canvas.width,canvas.height);
 		}
 		</script>
 		
