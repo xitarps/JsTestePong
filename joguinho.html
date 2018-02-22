@@ -127,7 +127,7 @@
 		//uniao das funcoes de deenhar e mover-----------------------------------------------------------------------------------------------------
 		function DesenhaEMove()
 		{
-		
+			//se atingiram placar max entao apresenta resultado da partida
 			if(telaFimBool)
 			{
 			criaImagemTemplate(0,0,canvas.width,canvas.height,'black');
@@ -244,6 +244,8 @@
 		//reseta bola e lanca randomicamente---------------------------------------------------------------------------------------------------------
 		function resetarBola()
 		{
+		
+			//checando se algum player atingiu o placar para vencer
 			if(p1Score >= PONTO_DA_VITORIA || p2Score >=PONTO_DA_VITORIA)
 				{
 					telaFimBool = true;
