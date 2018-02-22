@@ -38,7 +38,7 @@
 			//setando tipo de canvas
 			canvasContext = canvas.getContext('2d');
 			
-			//desenhando tela pela funcao desenhaNaTela com intervalo de 10 ..   (1000 = 1seg)
+			//desenhando tela pela funcao desenhaNaTela (1000 = 1seg)
 			setInterval(desenhaNaTela, 1000/framesPorSegundo);
 			
 		}
@@ -57,6 +57,10 @@
 			//desenhando linha divvisoria do campo dos jogadores
 			canvasContext.fillStyle = 'green';
 			canvasContext.fillRect(400,0,1,canvas.height);
+			
+			//desenhando p1 "raquete"
+			canvasContext.fillStyle = 'green';
+			canvasContext.fillRect(10,250,10,100);
 			
 			//desenhando a "bola"
 			canvasContext.fillStyle = 'white';
