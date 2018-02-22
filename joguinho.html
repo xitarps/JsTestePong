@@ -42,7 +42,6 @@
 		var framesPorSegundo =120;
 		var segs = 2;
 		
-		
 		//retorna posicao do mouse independente da tela------------------------------------------------------------------------------------------
 		function posicaoDoMouse(evt)
 		{
@@ -133,10 +132,8 @@
 			{
 				//bolaVelocidadeX = bolaVelocidadeX*-1;
 				//"reinicia partida"
-				bolaX = 395;
-				bolaY = 295;
-				bolaVelocidadeX = -1;
-				bolaVelocidadeY = -1;
+				resetarBola();
+				
 			}
 			if(bolaY > canvas.height-bolaTamanhoY || bolaY< 10)
 			{
@@ -144,11 +141,11 @@
 			}
 			
 			//ajustando area de bounce da raquete
-			raqPositionMaxY = raqPositionY - 105;
-			raqPositionMinY = raqPositionY + 105;
+			raqPositionMaxY = raqPositionY;
+			raqPositionMinY = raqPositionY + 107;
 			
 			//rebate da raquete
-			if(bolaX-10 <10 && bolaY > raqPositionMaxY && bolaY < raqPositionMinY)
+			if(bolaX-5 <10 && bolaY > raqPositionMaxY && bolaY < raqPositionMinY)
 			{
 				bolaVelocidadeY = bolaVelocidadeY*-1;
 				bolaVelocidadeX = bolaVelocidadeX*-1;
@@ -175,7 +172,13 @@
 			canvasContext.fill();
 		}
 		
-		
+		function resetarBola()
+		{
+			bolaX = 395;
+			bolaY = 295;
+			bolaVelocidadeX = -1;
+			bolaVelocidadeY = -1;
+		}
 		</script>
 		
 	</body>
