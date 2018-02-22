@@ -18,6 +18,10 @@
 		var canvas;
 		var canvasContext;
 		
+		//declarando variaveis para a bola
+		var bolaX;
+		var bolaY;
+		
 		window.onload = function()
 		{
 			//testando console
@@ -29,7 +33,7 @@
 			//setando tipo de canvas
 			canvasContext = canvas.getContext('2d');
 			
-			//desenhando tela
+			//desenhando tela pela funcao desenhaNaTela
 			desenhaNaTela()
 			
 		}
