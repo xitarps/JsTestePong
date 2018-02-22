@@ -9,9 +9,11 @@
 	<head>
 	
 	<body>
-	
+		
 	
 		<canvas id="gameCanvas" width="800" height="600"></canvas>
+		
+		
 		
 		<script>
 		//declarando variaveis de canvas
@@ -22,10 +24,13 @@
 		var bolaX = 395;
 		var bolaY = 295;
 		
+		//declarando variavel para controle de FPS
+		var framesPorSegundo =120;
+		
 		window.onload = function()
 		{
 			//testando console
-			console.log("Ola Mundo!");
+			console.log("Carregando jogo");
 			
 			//setando canvas pelo id 
 			canvas = document.getElementById('gameCanvas');
@@ -34,7 +39,7 @@
 			canvasContext = canvas.getContext('2d');
 			
 			//desenhando tela pela funcao desenhaNaTela com intervalo de 10 ..   (1000 = 1seg)
-			setInterval(desenhaNaTela, 10);
+			setInterval(desenhaNaTela, 1000/framesPorSegundo);
 			
 		}
 		
