@@ -74,6 +74,21 @@
 			
 		}
 		
+		//funcao para reiniciar jogo e placar ao clicar
+		function handleMouseClick(evt)
+		{
+		
+			//se telaFimBool for true zera placares e atualiza telaFimBool para false assim reiniciando jogo
+			if(telaFimBool)
+			{
+				p1Score = 0;
+				p2Score = 0;
+				
+				telaFimBool = false;
+			}
+		}
+		
+		
 		//dispara apos carregar todo conteudo da pagina-------------------------------------------------------------------------------------------
 		window.onload = function()
 		{
@@ -106,6 +121,8 @@
 			//alterando velocidade de ia randomicamente
 			setInterval(iaRandomicoVelocidade, 1000);
 			
+			//analisa se telaFimBool se tornou verdadeiro e ao clicar na tela reinicia o jogo
+			canvas.addEventListener('mousedown',handleMouseClick);
 			
 			//captura e atualiza posicao da raquete no eixo y
 			canvas.addEventListener('mousemove',
@@ -113,6 +130,9 @@
 				var mousePos = posicaoDoMouse(evt); 
 				raqPositionY = mousePos.y;;
 			});
+			
+			
+			
 			
 		}
 		
@@ -127,15 +147,17 @@
 		//uniao das funcoes de deenhar e mover-----------------------------------------------------------------------------------------------------
 		function DesenhaEMove()
 		{
-			//se atingiram placar max entao apresenta resultado da partida
+			//se atingiram placar max entao apresenta resultado da partida e mensagens pós partida
 			if(telaFimBool)
 			{
 			criaImagemTemplate(0,0,canvas.width,canvas.height,'black');
 			
+			canvasContext.font="20px Arial";			
 			canvasContext.fillStyle = 'white';
-			canvasContext.fillText('Placar Final:   ', 400, 50);
-			canvasContext.fillText('Player1 Score:   '+p1Score, 160, 100);
-			canvasContext.fillText('IA Score:   '+p2Score, canvas.width-220, 100);
+			canvasContext.fillText('Placar Final:   ', 360, 50);
+			canvasContext.fillText('Player1 Score:   '+p1Score, 110, 100);
+			canvasContext.fillText('IA Score:   '+p2Score, canvas.width-270, 100);
+			canvasContext.fillText('Clique na tela com botão esquerdo para jogar novamente...', 130, 400);
 			return;
 			}
 			
@@ -167,8 +189,9 @@
 					criaCirculoTemplate(bolaX,bolaY,10, 100, true, 'white')
 					
 			//desenhando score
-			canvasContext.fillText('Player1 Score:   '+p1Score, 160, 100);
-			canvasContext.fillText('IA Score:   '+p2Score, canvas.width-220, 100);
+			
+			canvasContext.fillText('Player1 Score:   '+p1Score, 110, 100);
+			canvasContext.fillText('IA Score:   '+p2Score, canvas.width-270, 100);
 			
 		}
 		
@@ -228,6 +251,7 @@
 		//funcao que funciona como template para criar obetos e assim melhorar a legibilidade do codigo----------------------------------------------
 		function criaImagemTemplate(esquerdaX,topoY, largura, altura, cor)
 		{
+			canvasContext.font="20px Arial";
 			canvasContext.fillStyle = cor;
 			canvasContext.fillRect(esquerdaX,topoY,largura,altura);
 		}
