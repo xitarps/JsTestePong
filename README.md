@@ -3,7 +3,7 @@
 This project is a little game of pong in html canvas with javascript
 
 ## JsPong screenshot:
-![pong](img/jspong.png)
+![pong](img/pong.gif)
 
 ## JsPong in action:
 
